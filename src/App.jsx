@@ -1,14 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
 import './App.css'
-import Counter from './components/Counter'
+import { CallAPI } from './api/gpt';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data , setData ] = useState('');
+  const [isLoading , setIsLoading] = useState(false);
 
+  const handleCallAPI = async () => {
+    try {
+      setIsLoading[true];
+      const message = await CallAPI();  
+      setData(message);  
+    } catch (error) {
+      
+    } finally {
+      setIsLoading[false];  
+    }
+
+  };
+ 
   return (
     <>
+    <button onClick={handleCallAPI}> Call API</button>
+    <div>메세지 왔다 : {data}</div>
     </>
   )
 }
