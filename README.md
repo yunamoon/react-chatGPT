@@ -1,1 +1,1 @@
-# react-pokemon
+# react-chatGPT
