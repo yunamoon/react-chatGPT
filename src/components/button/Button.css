@@ -1,0 +1,23 @@
+.btn {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.btn_update {
+    color: white;
+    background-color: rgb(100,200,100);
+}
+
+.btn_create {
+    color: white;
+    background-color: rgb(134, 134, 233);
+}
+
+.btn_delete {
+    color: white;
+    background-color: rgb(253, 86, 95);
+}
