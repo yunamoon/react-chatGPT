@@ -8,7 +8,8 @@ html, body {
 
 #root {
     background-color: white;
-    max-width: 1000px;
+    padding: 0 20px;
+    max-width: 800px;
     width: 100%;
     min-height: 100vh;
     height: 100%;

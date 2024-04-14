@@ -3,7 +3,7 @@ import { CallGPT } from '../api/gpt';
 import styled from 'styled-components';
 import UserForm from '../components/UserForm';
 
-const Form = () => {
+const Editor = () => {
 
     const [data , setData ] = useState('');
     const [isLoading , setIsLoading] = useState(false);
@@ -39,7 +39,7 @@ const Form = () => {
   )
 }
 
-export default Form
+export default Editor
 
 const AppContainer = styled.div `
   padding: 20px;
