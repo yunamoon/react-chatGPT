@@ -1,11 +1,18 @@
-import React from 'react'
-import { useSearchParams } from 'react-router-dom'
-const Home = () => {
 
-  const [params , setParams] = useSearchParams();
-  console.log([params.get('value')]);
+import React from 'react'
+import Header from '../components/header/Header';
+import Button from '../components/button/Button';
+import Diary from '../components/diary/Diary';
+
+const Home = () => {
   return (
-    <div>Home</div>
+    <>
+    <Header 
+    title={'2024년 04월'}
+    leftChild={<Button text={'<'}/>}
+    rightChild={<Button text={'>'}/>}/>
+    <Diary/>
+    </>
   )
 }
 
