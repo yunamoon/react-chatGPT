@@ -10,21 +10,27 @@ import { useReducer, useRef, createContext} from 'react';
 const test = [
   {
     id : 1,
-    createDate : new Date().getTime(),
+    createDate : new Date('2024-04-19').getTime(),
     emotionId : 1,
     contents : '1 test',
   },
   {
     id : 2,
-    createDate : new Date().getTime(),
+    createDate : new Date('2024-04-18').getTime(),
     emotionId : 2,
     contents : '2 test',
+  },
+  {
+    id : 4,
+    createDate : new Date('2024-03-18').getTime(),
+    emotionId : 3,
+    contents : '3 test',
   }
 ];
 
 
-const StateContext = createContext();
-const DispatchContext = createContext();
+export const StateContext = createContext();
+export const DispatchContext = createContext();
 
 
 function reducer(state, action) {
