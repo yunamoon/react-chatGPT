@@ -1,17 +1,18 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { CallGPT } from '../api/gpt';
 import Header from '../components/header/Header';
 import Button from '../components/button/Button';
 import UserForm from '../components/UserForm';
 import Form from '../components/form/Form';
 import { useNavigate } from 'react-router-dom';
+import { DispatchContext } from '../App';
 
 
 const Editor = () => {
     const nav = useNavigate();
     const [data , setData ] = useState('');
     const [isLoading , setIsLoading] = useState(false);
-    const [input, setInput] = useState
+    const {onCreate} = useContext(DispatchContext);
   
     const handleClickAPICall = async (userInput) => {
       try {
@@ -31,6 +32,14 @@ const Editor = () => {
       handleClickAPICall(userInput);
     };
 
+   const  onSubmit  = (input) => {
+    onCreate(
+      input.createDate.getTime(),
+      input.emotionId,
+      input.contents
+    );
+   };
+
   return (
 
     <>
@@ -42,7 +51,7 @@ const Editor = () => {
     onClick={()=>nav(-1)}/>
     }/>
 
-    <Form/>
+    <Form  onSubmit={ onSubmit}/>
     </>
 
   )
