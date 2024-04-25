@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { CallGPT } from '../api/gpt';
-import styled from 'styled-components';
+import Header from '../components/header/Header';
+import Button from '../components/button/Button';
 import UserForm from '../components/UserForm';
+import Form from '../components/form/Form';
+import { useNavigate } from 'react-router-dom';
+
 
 const Editor = () => {
-
+    const nav = useNavigate();
     const [data , setData ] = useState('');
     const [isLoading , setIsLoading] = useState(false);
+    const [input, setInput] = useState
   
     const handleClickAPICall = async (userInput) => {
       try {
@@ -27,33 +32,21 @@ const Editor = () => {
     };
 
   return (
-    <AppContainer>
-      <AppTitle>
-        오늘의 위로 🌕
-      </AppTitle>
-    <div>메세지 왔다 : {data}</div>
-    <UserForm    
-    isLoading={isLoading}
-    onSubmit={handleSubmit}/>
-    </AppContainer>
+
+    <>
+    <Header 
+    title={'새로운 일기 작성'}
+    leftChild={
+    <Button 
+    text={'< 뒤로가기'}
+    onClick={()=>nav(-1)}/>
+    }/>
+
+    <Form/>
+    </>
+
   )
 }
 
 export default Editor
 
-const AppContainer = styled.div `
-  padding: 20px;
-  display : flex;
-  flex-direction : column;
-  max-width: 720px;
-  width : 100%;
-  margin: 0 auto;
-`;
-
-const AppTitle = styled.div`
-  width : 100%;
-  font-weight : 400;
-  font-size : 35px;
-  text-align : center;
-  font-family: "Noto Serif KR";
-`;
