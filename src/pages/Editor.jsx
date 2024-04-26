@@ -38,6 +38,7 @@ const Editor = () => {
       input.emotionId,
       input.contents
     );
+    nav('/', {replace: true});
    };
 
   return (

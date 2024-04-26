@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Form.css';
 import Emotion from './emotion/Emotion';
 import Button from '../button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const emotionList = [
     {
@@ -47,6 +48,7 @@ const Form = ({ onSubmit}) => {
         emotionId : 3,
         contents : ""
       });
+    const nav = useNavigate();
 
     const onChangeInput = (e) => {
         
@@ -103,7 +105,7 @@ const Form = ({ onSubmit}) => {
         placeholder='오늘 하루는 어땠나요?'/>
     </section>
     <section className='button'>
-        <Button text={'취소'}/>
+        <Button text={'취소'} onClick={()=>nav(-1)}/>
         <Button 
         onClick={onClickSubmitButton}
         text={'완료'} type={'update'}/>
