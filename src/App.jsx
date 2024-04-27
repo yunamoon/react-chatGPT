@@ -21,7 +21,7 @@ const test = [
     contents : '2 test',
   },
   {
-    id : 4,
+    id : 3,
     createDate : new Date('2024-03-18').getTime(),
     emotionId : 3,
     contents : '3 test',
@@ -41,7 +41,7 @@ function reducer(state, action) {
     case 'UPDATE':
       return state.map((item)=> String(item.id) === String(action.data.id)? action.data : item);
     case 'DELETE':
-      return state.filter((item)=> String(item.id) !== String(action.data.id));
+      return state.filter((item)=> String(item.id) !== String(action.id));
   }
   return state;
 };
@@ -81,15 +81,13 @@ function App() {
   const onDelete = (id) => {
     dispatch({
       type:"DELETE",
-      data : {
-        id: id,
-      }
-    })
+      id
+    });
   };
 
   return (
     <>
-    <StateContext.Provider value={test}>
+    <StateContext.Provider value={data}>
       <DispatchContext.Provider value={{onCreate, onDelete, onUpdate}}>
       <Routes>
       <Route path='/' element={<Home/>} />
