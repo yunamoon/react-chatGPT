@@ -1,10 +1,31 @@
 import React from 'react'
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
+import Header from '../components/header/Header';
+import Button from '../components/button/Button';
+import EmotionViewer from '../components/emotionViewer/EmotionViewer';
+import useDiary from '../hooks/useDiary';
+import { getStringDate } from '../util/getStringDate';
 
 const Diary = () => {
+  const nav = useNavigate();
   const params = useParams();
+  const currentDiary = useDiary(params.id);
+
+  if(!currentDiary) {
+    return <div>로딩중 ...</div>;
+  }
+
+  const {createDate, emotionId, contents} = currentDiary;
+  const title = getStringDate(new Date(createDate));
+
   return (
-    <div>{params.id} Diary</div>
+    <div>
+      <Header 
+      title={`${title} 일기`}
+      leftChild={<Button text={'< 뒤로가기'} onClick={()=>nav(-1)}/>}
+      rightChild={<Button text={'수정하기'} onClick={()=>nav(`/update/${params.id}`)}/>}/>
+      <EmotionViewer emotionId={emotionId} contents={contents}/>
+    </div>
   )
 }
 

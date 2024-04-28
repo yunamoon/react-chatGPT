@@ -4,32 +4,20 @@ import Button from '../components/button/Button';
 import Header from '../components/header/Header';
 import Form from '../components/form/Form';
 import { DispatchContext , StateContext} from '../App';
+import useDiary from '../hooks/useDiary';
 
 const Update = () => {
   const params = useParams();
   const nav = useNavigate();
   const {onDelete , onUpdate} = useContext(DispatchContext);
-  const data = useContext(StateContext);
-  const [currentDiaryItem, setCurrentDiaryItem] = useState();
-
+  const currentDiaryItem = useDiary(params.id);
+  
   const onClickDelete = () => {
    if(window.confirm('정말 삭제하시겠습니까?')) {
     onDelete(params.id);
     nav("/", {replace:true});
    }
   };
-
- 
-  useEffect(()=>{
-      const currentDiary = data.find((item)=> String(item.id) === String(params.id));
-      if(!currentDiary) {
-        window.alert('잘못된 접근입니다.');
-        nav('/', {replace:true});
-      }
-      setCurrentDiaryItem(currentDiary);
-
-  }, [params.id, data]);
-
 
   const onSubmit = (input) => {
     if( window.confirm('일기를 정말 수정하시겠습니까?')) {

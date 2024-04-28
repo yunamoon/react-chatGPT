@@ -3,44 +3,8 @@ import './Form.css';
 import Emotion from './emotion/Emotion';
 import Button from '../button/Button';
 import { useNavigate } from 'react-router-dom';
-
-const emotionList = [
-    {
-        id : 1,
-        name : '좋음'
-    },
-    {
-        id : 2,
-        name : '행복'
-    },
-    {
-        id : 3,
-        name : '보통'
-    },
-    {
-        id : 4,
-        name : '우울'
-    },
-    {
-        id : 5,
-        name : '화남'
-    },
-];
-
-const getStringDate = (TargetDate) => {
-    let year = TargetDate.getFullYear();
-    let month = TargetDate.getMonth()+1;
-    let date = TargetDate.getDate();
-
-    if(month < 10) {
-        month = `0${month}`;
-    }
-    if(date < 10) {
-        date = `0${date}`;
-    }
-
-    return`${year}-${month}-${date}`;
-};
+import { emotionList } from '../../util/constants';
+import { getStringDate } from '../../util/getStringDate';
 
 const Form = ({ onSubmit, currentData}) => {
     const [input, setInput] = useState({
