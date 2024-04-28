@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Form.css';
 import Emotion from './emotion/Emotion';
 import Button from '../button/Button';
@@ -42,7 +42,7 @@ const getStringDate = (TargetDate) => {
     return`${year}-${month}-${date}`;
 };
 
-const Form = ({ onSubmit}) => {
+const Form = ({ onSubmit, currentData}) => {
     const [input, setInput] = useState({
         createDate : new Date(),
         emotionId : 3,
@@ -50,6 +50,16 @@ const Form = ({ onSubmit}) => {
       });
     const nav = useNavigate();
 
+    useEffect(()=>{
+        if(currentData) {
+            setInput({
+                ...currentData,
+                createDate : new Date(Number(currentData.createDate)),
+            });
+        }
+    }, [currentData]);
+
+    
     const onChangeInput = (e) => {
         
         let name = e.target.name;
