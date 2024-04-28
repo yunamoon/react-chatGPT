@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const DiaryList = ({data}) => {
   const nav = useNavigate();
-
+  console.log(data)
   const [sort, setSort] = useState('latest');
 
   const onChangeSort = (e) => {

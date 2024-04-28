@@ -4,8 +4,7 @@ import { getEmotion } from '../../util/useGetEmotion';
 import { emotionList } from '../../util/constants';
 
 
-const EmotionViewer = () => {
-    const emotionId = 1;
+const EmotionViewer = ({ emotionId}) => {
     const emotionItem = emotionList.find((item) =>  String(item.id) === String(emotionId));
 
   return (

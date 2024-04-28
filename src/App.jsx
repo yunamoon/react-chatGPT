@@ -5,29 +5,7 @@ import Diary from './pages/Diary';
 import Notfound from './pages/Notfound';
 import Editor from './pages/Editor';
 import Update from './pages/Update';
-import { useReducer, useRef, createContext} from 'react';
-
-const test = [
-  {
-    id : 1,
-    createDate : new Date('2024-04-19').getTime(),
-    emotionId : 1,
-    contents : '1 test',
-  },
-  {
-    id : 2,
-    createDate : new Date('2024-04-18').getTime(),
-    emotionId : 2,
-    contents : '2 test',
-  },
-  {
-    id : 3,
-    createDate : new Date('2024-03-18').getTime(),
-    emotionId : 3,
-    contents : '3 test',
-  }
-];
-
+import { useReducer, useRef, createContext, useEffect, useState} from 'react';
 
 export const StateContext = createContext();
 export const DispatchContext = createContext();
@@ -35,20 +13,60 @@ export const DispatchContext = createContext();
 
 function reducer(state, action) {
 
+  let nextState;
+
   switch(action.type) {
+    case 'INIT':
+      return action.data;
     case 'CREATE':
-      return [action.data, ...state];
+     { nextState = [action.data, ...state];
+      break; 
+    }
     case 'UPDATE':
-      return state.map((item)=> String(item.id) === String(action.data.id)? action.data : item);
+      {nextState =  state.map((item)=> String(item.id) === String(action.data.id)? action.data : item);
+      break; }
     case 'DELETE':
-      return state.filter((item)=> String(item.id) !== String(action.id));
+      {nextState = state.filter((item)=> String(item.id) !== String(action.id));
+      break; }
   }
-  return state;
-};
+
+  localStorage.setItem('diary', JSON.stringify(nextState));
+  return nextState;
+}
 
 function App() {
-  const idRef = useRef(3)
-  const [data, dispatch] = useReducer(reducer, test);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const idRef = useRef(1)
+  const [data, dispatch] = useReducer(reducer, []);
+ 
+  useEffect(()=>{
+    const storageData = localStorage.getItem('diary');
+  
+    if (!storageData) {
+      setIsLoading(false);
+      return;
+    }
+
+    const parseData = JSON.parse(storageData);
+
+    if(!Array.isArray(parseData)) {
+         setIsLoading(false);
+      return;
+    }
+
+    let maxId = 0;
+    parseData.forEach((item)=>{
+      if (Number(item.id) > maxId) {
+        maxId = Number(item.id);
+      }
+    })
+    dispatch({
+      type : "INIT",
+      data : parseData,
+    });
+    setIsLoading(false);
+  },[]);
 
   // 일기 추가
   const onCreate = (createDate , emotionId, contents) => {
@@ -85,6 +103,10 @@ function App() {
     });
   };
 
+  if(isLoading) {
+    return <div>데이터를 로딩하고 있습니다.</div>
+  }
+  
   return (
     <>
     <StateContext.Provider value={data}>
