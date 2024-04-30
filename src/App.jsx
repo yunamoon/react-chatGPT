@@ -6,37 +6,13 @@ import Notfound from './pages/Notfound';
 import Editor from './pages/Editor';
 import Update from './pages/Update';
 import { useReducer, useRef, createContext, useEffect, useState} from 'react';
-
+import { reducer } from './reducer/reducer';
 export const StateContext = createContext();
 export const DispatchContext = createContext();
 
 
-function reducer(state, action) {
-
-  let nextState;
-
-  switch(action.type) {
-    case 'INIT':
-      return action.data;
-    case 'CREATE':
-     { nextState = [action.data, ...state];
-      break; 
-    }
-    case 'UPDATE':
-      {nextState =  state.map((item)=> String(item.id) === String(action.data.id)? action.data : item);
-      break; }
-    case 'DELETE':
-      {nextState = state.filter((item)=> String(item.id) !== String(action.id));
-      break; }
-  }
-
-  localStorage.setItem('diary', JSON.stringify(nextState));
-  return nextState;
-}
-
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-
   const idRef = useRef(1)
   const [data, dispatch] = useReducer(reducer, []);
  
@@ -103,6 +79,7 @@ function App() {
     });
   };
 
+  
   if(isLoading) {
     return <div>데이터를 로딩하고 있습니다.</div>
   }

@@ -9,13 +9,13 @@ html, body {
 
 #root {
     background-color: white;
-    padding: 0 20px;
-    max-width: 800px;
+    color: #555555;
+    padding: 40px;
+    max-width: 600px;
     width: 100%;
     min-height: 100vh;
-    height: 100%;
+    height: 110%;
     margin: 20px auto;
-    box-shadow: rgba(100, 100, 100, 0.2) 0px 0px 29px 0px;
     border-radius: 10px;
 }
 
