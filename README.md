@@ -4,7 +4,7 @@
   <h3 align="center">React Diary</h3>
 
   <p align="center">
-    React + LocalStorage 기반의 일기장입니다.
+    React + localStorage 기반의 일기장입니다.
     <br />
     <br />
     <a href="https://react-diary-phi.vercel.app/">View Demo</a>
@@ -17,7 +17,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-React + LocalStorage 기반의 일기장으로, 오늘의 감정 상태와 그에 따른 일상을 기록 할 수 있습니다.
+React + localStorage 기반의 일기장으로, 오늘의 감정 상태와 그에 따른 일상을 기록 할 수 있습니다.
 
 What did I do:
 * 다양한 감정 상태를 선택하고, 감정을 테마로 일기를 작성할 수 있습니다.
